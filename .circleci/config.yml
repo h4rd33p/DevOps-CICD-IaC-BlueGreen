@@ -1,12 +1,10 @@
 version: 2
 
-on: 
-
 jobs:
   plan-apply:
     working_directory: /tmp/project
     docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+      - image: zenika/terraform-aws-cli:latest
     steps:
       - checkout
       - run:
@@ -22,13 +20,14 @@ jobs:
 
   apply:
     docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+      - image: zenika/terraform-aws-cli:latest
     steps:
       - attach_workspace:
           at: .
       - run:
           name: terraform
           command: |
+            aws s3 ls
             terraform apply -auto-approve tfapply
       - persist_to_workspace:
           root: .
@@ -37,7 +36,7 @@ jobs:
 
   plan-destroy:
     docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+      - image: zenika/terraform-aws-cli:latest
     steps:
       - attach_workspace:
           at: .
@@ -53,7 +52,7 @@ jobs:
 
   destroy:
     docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+      - image: zenika/terraform-aws-cli:latest
     steps:
       - attach_workspace:
           at: .
