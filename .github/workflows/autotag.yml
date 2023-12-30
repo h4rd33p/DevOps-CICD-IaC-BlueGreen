@@ -6,7 +6,7 @@ name: Update version
 
 on:
   workflow_run:
-    workflows: ['Pre Commit']
+    workflows: ['Pre Commit', 'Continous Integrations']
     branches: [main]
     types:
       - completed
