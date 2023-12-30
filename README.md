@@ -78,21 +78,23 @@ Below tools where used in the Continuous-Integration (CI) Pipeline:
 ├── codedeploy.tf
 ├── coverage.svg
 ├── coverage.xml
+├── doc
+│   ├── Step1_APIG_codeDeploy_lambda.svg
+│   └── Step2_APIG_codeDeploy_lambda.svg
 ├── lambda.tf
 ├── outputs.tf
 ├── providers.tf
+├── PULL_REQUEST_TEMPLATE
+│   └── PULL_REQUEST.md
+├── README.md
 ├── requirements.txt
 ├── src
 │   ├── main.py
-│   │   └── main.py
 │   └── upload
 ├── tests
 │   ├── __init__.py
-│   │   └── __init__.py
 │   └── unit
 │       ├── __init__.py
-│       │   ├── __init__.py
-│       │   └── test_main.py
 │       └── test_main.py
 ├── upload
 │   └── lambda.zip
@@ -104,6 +106,85 @@ Below tools where used in the Continuous-Integration (CI) Pipeline:
 - Auto revert deployment on high number of failures
 
 ## Terraform Documentation
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.2 |
+| <a name="requirement_archive"></a> [archive](#requirement\_archive) | ~> 2.4.1 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.23.1 |
+| <a name="requirement_null"></a> [null](#requirement\_null) | ~> 3.2.2 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_archive"></a> [archive](#provider\_archive) | 2.4.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.23.1 |
+| <a name="provider_null"></a> [null](#provider\_null) | 3.2.2 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_apigatewayv2_api.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/apigatewayv2_api) | resource |
+| [aws_apigatewayv2_integration.apigw_lambda_handler](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/apigatewayv2_integration) | resource |
+| [aws_apigatewayv2_route.post_handler](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/apigatewayv2_route) | resource |
+| [aws_apigatewayv2_stage.prod](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/apigatewayv2_stage) | resource |
+| [aws_cloudwatch_log_group.main_api_gw](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
+| [aws_codedeploy_app.helloworld](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codedeploy_app) | resource |
+| [aws_codedeploy_deployment_group.helloworld](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codedeploy_deployment_group) | resource |
+| [aws_iam_role.codedeploy_deployment_group_helloworld](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.lambda_helloworld](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.codedeploy_deployment_group_helloworld](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.lambda_basic_execution](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_lambda_alias.helloworld](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_alias) | resource |
+| [aws_lambda_function.helloworld](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
+| [aws_lambda_permission.apigw_lambda_invoker](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
+| [null_resource.run_codedeploy](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [archive_file.helloworld](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_apig_CW_retention"></a> [apig\_CW\_retention](#input\_apig\_CW\_retention) | Specifies the number of days you want to retain log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1096, 1827, 2192, 2557, 2922, 3288, 3653, and 0. If you select 0, the events in the log group are always retained and never expire | `number` | `7` | no |
+| <a name="input_apig_integration_description"></a> [apig\_integration\_description](#input\_apig\_integration\_description) | Description of the integration | `string` | `"CodeDeploy helloworld"` | no |
+| <a name="input_apig_integration_type"></a> [apig\_integration\_type](#input\_apig\_integration\_type) | Integration type of an integration. Valid values: AWS (supported only for WebSocket APIs), AWS\_PROXY, HTTP (supported only for WebSocket APIs), HTTP\_PROXY, MOCK (supported only for WebSocket APIs). For an HTTP API private integration, use HTTP\_PROXY | `string` | `"AWS_PROXY"` | no |
+| <a name="input_apig_name"></a> [apig\_name](#input\_apig\_name) | API name | `string` | `"helloworld"` | no |
+| <a name="input_apig_protocol"></a> [apig\_protocol](#input\_apig\_protocol) | API protocol. Valid values: HTTP, WEBSOCKET | `string` | `"HTTP"` | no |
+| <a name="input_apig_route_key"></a> [apig\_route\_key](#input\_apig\_route\_key) | Route key for the route. For HTTP APIs, the route key can be either $default, or a combination of an HTTP method and resource path, for example, GET /pets | `string` | `"GET /hello"` | no |
+| <a name="input_apig_stage_autoDeploy"></a> [apig\_stage\_autoDeploy](#input\_apig\_stage\_autoDeploy) | Whether updates to an API automatically trigger a new deployment. Defaults to false. Applicable for HTTP APIs | `bool` | `true` | no |
+| <a name="input_apig_stage_name"></a> [apig\_stage\_name](#input\_apig\_stage\_name) | Name of the stage. Must be between 1 and 128 characters in length | `string` | `"production"` | no |
+| <a name="input_codedeploy_IAMRole_name"></a> [codedeploy\_IAMRole\_name](#input\_codedeploy\_IAMRole\_name) | codedeploy IAM Role name | `string` | `"helloworldCodeDeployDeploymentGroupRole"` | no |
+| <a name="input_codedeploy_app_name"></a> [codedeploy\_app\_name](#input\_codedeploy\_app\_name) | codeploy app name | `string` | `"helloworldApp"` | no |
+| <a name="input_codedeploy_deploymentConfig"></a> [codedeploy\_deploymentConfig](#input\_codedeploy\_deploymentConfig) | default codedeploy deployment config | `string` | `"CodeDeployDefault.LambdaLinear10PercentEvery2Minutes"` | no |
+| <a name="input_codedeploy_deploymentGroup_name"></a> [codedeploy\_deploymentGroup\_name](#input\_codedeploy\_deploymentGroup\_name) | codedeploy deployment group name | `string` | `"helloworldDeploymentGroup"` | no |
+| <a name="input_codedeploy_deploymentGroup_taffic"></a> [codedeploy\_deploymentGroup\_taffic](#input\_codedeploy\_deploymentGroup\_taffic) | Indicates whether to route deployment traffic behind a load balancer. Valid Values are WITH\_TRAFFIC\_CONTROL or WITHOUT\_TRAFFIC\_CONTROL. Default is WITHOUT\_TRAFFIC\_CONTROL | `string` | `"WITH_TRAFFIC_CONTROL"` | no |
+| <a name="input_codedeploy_deploymentGroup_type"></a> [codedeploy\_deploymentGroup\_type](#input\_codedeploy\_deploymentGroup\_type) | Indicates whether to run an in-place deployment or a blue/green deployment. Valid Values are IN\_PLACE or BLUE\_GREEN. Default is IN\_PLACE | `string` | `"BLUE_GREEN"` | no |
+| <a name="input_lambda_alias_name"></a> [lambda\_alias\_name](#input\_lambda\_alias\_name) | alias of lambda | `string` | `"live"` | no |
+| <a name="input_lambda_function_name"></a> [lambda\_function\_name](#input\_lambda\_function\_name) | name for the lambda function | `string` | `"helloworldLambda"` | no |
+| <a name="input_lambda_function_runtime_python"></a> [lambda\_function\_runtime\_python](#input\_lambda\_function\_runtime\_python) | python  version for lambda | `string` | `"python3.10"` | no |
+| <a name="input_lambda_publish"></a> [lambda\_publish](#input\_lambda\_publish) | Whether to publish creation/change as new Lambda Function Version. Default:false | `bool` | `true` | no |
+| <a name="input_lambda_role_name"></a> [lambda\_role\_name](#input\_lambda\_role\_name) | Lambda IAM role name | `string` | `"helloworldLambdaRole"` | no |
+| <a name="input_lambda_timeout"></a> [lambda\_timeout](#input\_lambda\_timeout) | duration lambda runs | `string` | `"10"` | no |
+| <a name="input_lambda_xray_tracing_mode"></a> [lambda\_xray\_tracing\_mode](#input\_lambda\_xray\_tracing\_mode) | enables xray tracing for lambda Active/Passthrough | `string` | `"Active"` | no |
+| <a name="input_region"></a> [region](#input\_region) | AWS Region | `string` | `"eu-west-2"` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_apigw_base_url"></a> [apigw\_base\_url](#output\_apigw\_base\_url) | Base URL for API Gateway stage. |
+| <a name="output_lambda_alias_name"></a> [lambda\_alias\_name](#output\_lambda\_alias\_name) | n/a |
+| <a name="output_lambda_alias_version"></a> [lambda\_alias\_version](#output\_lambda\_alias\_version) | n/a |
+| <a name="output_lambda_function_arn"></a> [lambda\_function\_arn](#output\_lambda\_function\_arn) | n/a |
+| <a name="output_lambda_function_name"></a> [lambda\_function\_name](#output\_lambda\_function\_name) | n/a |
+| <a name="output_lambda_version"></a> [lambda\_version](#output\_lambda\_version) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
