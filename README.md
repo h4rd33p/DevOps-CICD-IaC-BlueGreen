@@ -56,14 +56,6 @@ Below tools where used in the Continuous-Integration (CI) Pipeline:
 
 **CircleCI:** hosts the Continuous-Delivery (CD) pipeline. It is integrated with the GitHub for the respository changes for PR requests and runs the terraform 
 
-
-
-
-   
- :CircleCI IaC:Terraform BlueGreen-Deployment:CodeDeply
-#### | API:API-Gateway | Application:Lambda | Code:Python | CI-tests:AutoTag, ruff, Pytest with coverage | Pre-commit for Local+on-commit for terraform(fmt, validate, tflint, trivy, docs | CD:CircleCI Terraform stages
-### Terraform Config: State file Backend:S3, Lock file backend: DynamoDB
-
 ## Prerequisite
 - Terraform [installed](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)  
 - Access to AWS [account](https://aws.amazon.com/resources/create-account/) and [configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) for terraform to connect to the AWS (Note: Make sure you are familier with the [least privilleged access](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) )
