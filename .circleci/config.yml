@@ -1,5 +1,9 @@
-version: 2
+version: 2.1
 
+on:
+  pullrequest:
+    branches:
+      - main
 jobs:
   plan-apply:
     working_directory: /tmp/project
