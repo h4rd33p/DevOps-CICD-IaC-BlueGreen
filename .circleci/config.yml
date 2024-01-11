@@ -1,9 +1,5 @@
 version: 2.1
 
-on:
-  pullrequest:
-    branches:
-      - main
 jobs:
   plan-apply:
     working_directory: /tmp/project
@@ -68,7 +64,17 @@ workflows:
   version: 2.1
   plan_approve_apply:
     jobs:
+      - test:
+          filters: &filters-main # this yaml anchor is setting these values to "filters-staging"
+            branches:
+              only: main
+            tags:
+              ignore: /.*/
       - plan-apply
+          requires:
+            - test
+          filters:
+            <<: *filters-main # this is calling the previously set yaml anchor
       - hold-apply:
           type: approval
           requires:
