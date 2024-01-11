@@ -1,5 +1,9 @@
 version: 2.1
 
+on:
+  pullrequest:
+    branches:
+      - main
 jobs:
   plan-apply:
     working_directory: /tmp/project
@@ -64,12 +68,6 @@ workflows:
   version: 2.1
   plan_approve_apply:
     jobs:
-      - test:
-          filters: 
-            branches:
-              only: main
-            tags:
-              ignore: /.*/
       - plan-apply
       - hold-apply:
           type: approval
