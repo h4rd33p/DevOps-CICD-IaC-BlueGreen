@@ -3,27 +3,32 @@
 # ----------------------------------------------------------
 
 output "lambda_function_name" {
-  value = aws_lambda_function.helloworld.function_name
+  description = "Lambda Function Name"
+  value       = aws_lambda_function.helloworld.function_name
 }
 
 output "lambda_version" {
-  value = aws_lambda_function.helloworld.version
+  description = "Lambda Function Version"
+  value       = aws_lambda_function.helloworld.version
 }
 
 output "lambda_alias_name" {
-  value = aws_lambda_alias.helloworld.name
+  description = "Lambda Function Alias Name"
+  value       = aws_lambda_alias.helloworld.name
 }
 
 output "lambda_alias_version" {
-  value = aws_lambda_alias.helloworld.function_version
+  description = "Lambda Function Alias Version"
+  value       = aws_lambda_alias.helloworld.function_version
 }
 
 output "lambda_function_arn" {
-  value = aws_lambda_function.helloworld.arn
+  description = "Lambda Function ARN"
+  value       = aws_lambda_function.helloworld.arn
 }
 
 # ----------------------------------------------------------
-# Lambda Outputs
+# API Gateway Outputs
 # ----------------------------------------------------------
 
 output "apigw_base_url" {

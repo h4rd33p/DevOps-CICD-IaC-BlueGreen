@@ -178,9 +178,9 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_apigw_base_url"></a> [apigw\_base\_url](#output\_apigw\_base\_url) | Base URL for API Gateway stage. |
-| <a name="output_lambda_alias_name"></a> [lambda\_alias\_name](#output\_lambda\_alias\_name) | n/a |
-| <a name="output_lambda_alias_version"></a> [lambda\_alias\_version](#output\_lambda\_alias\_version) | n/a |
-| <a name="output_lambda_function_arn"></a> [lambda\_function\_arn](#output\_lambda\_function\_arn) | n/a |
-| <a name="output_lambda_function_name"></a> [lambda\_function\_name](#output\_lambda\_function\_name) | n/a |
-| <a name="output_lambda_version"></a> [lambda\_version](#output\_lambda\_version) | n/a |
+| <a name="output_lambda_alias_name"></a> [lambda\_alias\_name](#output\_lambda\_alias\_name) | Lambda Function Alias Name |
+| <a name="output_lambda_alias_version"></a> [lambda\_alias\_version](#output\_lambda\_alias\_version) | Lambda Function Alias Version |
+| <a name="output_lambda_function_arn"></a> [lambda\_function\_arn](#output\_lambda\_function\_arn) | Lambda Function ARN |
+| <a name="output_lambda_function_name"></a> [lambda\_function\_name](#output\_lambda\_function\_name) | Lambda Function Name |
+| <a name="output_lambda_version"></a> [lambda\_version](#output\_lambda\_version) | Lambda Function Version |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
