@@ -1,9 +1,5 @@
 version: 2.1
 
-on:
-  pullrequest:
-    branches:
-      - main
 jobs:
   plan-apply:
     working_directory: /tmp/project
@@ -66,6 +62,12 @@ jobs:
             terraform apply -auto-approve tfdestroy
 workflows:
   version: 2.1
+  on:
+    push:
+      branches:
+        - main
+      ignore-tags:
+        - /.*/
   plan_approve_apply:
     jobs:
       - plan-apply
