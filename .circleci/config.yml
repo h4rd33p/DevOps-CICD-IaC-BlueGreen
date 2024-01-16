@@ -68,7 +68,12 @@ workflows:
   version: 2.1
   plan_approve_apply:
     jobs:
-      - plan-apply
+      - plan-apply:
+          filters:
+            branches:
+              only: main
+            tags:
+              ignore: /.*/
       - hold-apply:
           type: approval
           requires:
