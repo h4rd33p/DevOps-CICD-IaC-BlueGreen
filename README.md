@@ -64,7 +64,7 @@ Continuous-Integration (CI) pipeline used below tools:
 
 ### 🏗️ Continuous-Delivery (CD)
 
-`.circleci/config.yml`: GitHub-action workflow runs on any push to **main** branch, but not tags push. It triggers the Continuous-Delivery (CD) pipeline on the CircleCI for provisioning AWS resources using Terraform.
+`.circleci/config.yml`: GitHub-action workflow runs on the Pull-request to **main** branch. It triggers the Continuous-Delivery (CD) pipeline on the CircleCI for provisioning AWS resources using Terraform.
 
 **CircleCI:** It runs first run checks and validations on the Terraform code. If previous workflow was successfull, it then creates a Terraform plan file, that it carries to next the workflows. It require manual appovals for **apply** and **destroy** workflows. 
 
