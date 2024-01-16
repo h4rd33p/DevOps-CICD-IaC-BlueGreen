@@ -16,8 +16,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup python
-        uses: actions/setup-python@v4
+      - name: Setup python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
